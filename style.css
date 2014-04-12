@@ -23,5 +23,5 @@ td, th {
 }
 
 table {
-    page-break-before: always;
+    page-break-after: always;
 }
