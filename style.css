@@ -3,7 +3,7 @@ body {
 }
 
 table, td, th {
-    border: 1px solid #ccc;
+    border: 1px solid #e1e1e1;
     border-collapse: collapse;
 }
 
@@ -12,10 +12,14 @@ th {
     font-size: 3.5em;
 }
 
-td, th {
-    padding: 1em;
-    vertical-align: top;
+td {
     font-size: 2em;
+    font-weight: bold;
+}
+
+td, th {
+    padding: 25px;
+    vertical-align: top;
 }
 
 table {
