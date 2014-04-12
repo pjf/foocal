@@ -82,15 +82,19 @@ sub print_room_timetable {
 
     my $time = $session->[1];
 
-    say "<h1>$time</h1>";
+    # say "<h1>$time</h1>";
     say "<!-- We all feel REALLY dirty for doing this... -->";
     say "<table>";
+    say qq{<th colspan="2">$time</th>};   # Heading
 
     for (my $i = 2; $i < @$session; $i++) {
         my $room    = $matrix[ROOM_ROW][$i];
         my $session = $session->[$i];
         next if not $session;   # Skip room with no session
         $room ||= "Unassigned";
+        $room =~ s{\(.*?\)}{}g; # Remove crap inside parens in room titles
+
+
         say "<tr><th>$room</th><td>$session</td></tr>";
     }
     say "</table>";
