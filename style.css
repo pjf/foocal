@@ -9,11 +9,11 @@ table, td, th {
 
 th {
     width: 10%;
-    font-size: 3.5em;
+    font-size: 2em;
 }
 
 td {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
 }
 
@@ -23,5 +23,5 @@ td, th {
 }
 
 table {
-    width: 80%;
+    page-break-before: always;
 }
