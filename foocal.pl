@@ -13,9 +13,6 @@ use constant DEBUG => 1;
 use Net::Google::Spreadsheets;
 use Config::Tiny;
 
-my $user = 'WodOcCedciv3';
-my $pass = 'nathShojOyn8';
-
 my $config = Config::Tiny->new->read('auth.ini');
 
 my $google = Net::Google::Spreadsheets->new(
