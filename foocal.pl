@@ -18,6 +18,17 @@ debug("Reading config...");
 
 my $config = Config::Tiny->new->read('auth.ini');
 
+# If there's no config file, walk the user through...
+if (not $config->{Google}{username}) {
+    say "Oh hey! I can't find a config file!\n";
+    say "It needs to be called 'auth.ini' and look like this:\n";
+    say "[Google]";
+    say "username = your-google-username";
+    say "password = your-google-password";
+
+    exit 1;
+}
+
 debug("Logging in...");
 
 my $google = Net::Google::Spreadsheets->new(
