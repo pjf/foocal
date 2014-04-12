@@ -62,28 +62,8 @@ say "</body></html>";
 sub print_header {
     say q{
         <!DOCTYPE html>
-        <html><head><style>
-            body {
-                font-family: sans-serif;
-            }
-
-            table, td, th {
-                border: 1px solid #ccc;
-                border-collapse: collapse;
-            }
-
-            th {
-                width: 10%;
-            }
-
-            td, th {
-                padding: 1em;
-            }
-
-            table {
-                width: 80%;
-            }
-        </style>
+        <html><head>
+        <link type="text/css" rel="stylesheet" href="style.css" />
         </head>
         <body>
     };
