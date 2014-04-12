@@ -9,18 +9,23 @@ use constant KIWI_SHEET => '0AhJdYvDd5jsgdDZkMHIxNndMcGdhZjJRZlF4Tm1vcHc';
 use constant TIME_COLUMN => 1;
 use constant ROOM_ROW    => 1;
 use constant DEBUG => 1;
+use constant FIRST_SESSION_OFFSET => 2;
 
 use Net::Google::Spreadsheets;
 use Config::Tiny;
 
+debug("Reading config...");
+
 my $config = Config::Tiny->new->read('auth.ini');
+
+debug("Logging in...");
 
 my $google = Net::Google::Spreadsheets->new(
     username => $config->{Google}{username},
     password => $config->{Google}{password},
 );
 
-debug("Logging in...");
+debug("Finding spreadsheet...");
 
 my $spreadsheet = $google->spreadsheet({
     key => KIWI_SHEET,
@@ -46,15 +51,19 @@ foreach my $cell (@cells) {
     $matrix[$cell->row][$cell->col] = $cell->content;
 }
 
+debug("Printing timetables...");
+
 # Now walk through each session time...
 
 print_header();
 
-foreach my $session (@matrix) {
+foreach my $session (@matrix[FIRST_SESSION_OFFSET..$#matrix]) {
     print_room_timetable($session);
 }
 
 say "</body></html>";
+
+debug("Done!");
 
 sub print_header {
     say q{
@@ -80,6 +89,8 @@ sub print_room_timetable {
     for (my $i = 2; $i < @$session; $i++) {
         my $room    = $matrix[ROOM_ROW][$i];
         my $session = $session->[$i];
+        next if not $session;   # Skip room with no session
+        $room ||= "Unassigned";
         say "<tr><th>$room</th><td>$session</td></tr>";
     }
     say "</table>";
